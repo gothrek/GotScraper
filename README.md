@@ -1,0 +1,2 @@
+# GotScraper
+Video Game Scraper
