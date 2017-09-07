@@ -1,4 +1,5 @@
 ﻿Public NotInheritable Class SplashScreen1
+    Dim tempo As Integer = 0
 
     'TODO: questo form può essere facilmente impostato come schermata iniziale per l'applicazione dalla scheda "Applicazione"
     '  di Creazione progetti (scegliere "Proprietà" dal menu "Progetto").
@@ -12,10 +13,10 @@
 
         'Titolo dell'applicazione
         If My.Application.Info.Title <> "" Then
-            ApplicationTitle.Text = My.Application.Info.Title
+            UltraLabelApplicationTitle.Text = My.Application.Info.Title
         Else
             'Se il titolo dell'applicazione manca, verrà usato il nome dell'applicazione, senza l'estensione
-            ApplicationTitle.Text = System.IO.Path.GetFileNameWithoutExtension(My.Application.Info.AssemblyName)
+            UltraLabelApplicationTitle.Text = System.IO.Path.GetFileNameWithoutExtension(My.Application.Info.AssemblyName)
         End If
 
         'Formatta le informazioni sulla versione utilizzando come stringa di formattazione il testo impostato nel controllo Version in fase di esecuzione.
@@ -26,10 +27,27 @@
         '
         '    Version.Text = System.String.Format(Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
 
-        Version.Text = System.String.Format(Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor)
+        UltraLabelVersion.Text = System.String.Format(UltraLabelVersion.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor)
 
         'Informazioni sul copyright
-        Copyright.Text = My.Application.Info.Copyright
+        UltraLabelCopyright.Text = My.Application.Info.Copyright
+
+        Timer1.Start()
+
     End Sub
 
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        tempo += 1
+        If tempo = 2 Then
+            Form1.Show()
+            Me.Close()
+
+        End If
+    End Sub
+
+    Private Sub UltraButtonInsertCoin_Click(sender As Object, e As EventArgs) Handles UltraButtonInsertCoin.Click
+        Form1.Show()
+        Me.Close()
+
+    End Sub
 End Class

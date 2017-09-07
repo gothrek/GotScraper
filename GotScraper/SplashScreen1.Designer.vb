@@ -13,11 +13,6 @@ Partial Class SplashScreen1
             MyBase.Dispose(disposing)
         End Try
     End Sub
-    Friend WithEvents ApplicationTitle As System.Windows.Forms.Label
-    Friend WithEvents Version As System.Windows.Forms.Label
-    Friend WithEvents Copyright As System.Windows.Forms.Label
-    Friend WithEvents MainLayoutPanel As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents DetailsLayoutPanel As System.Windows.Forms.TableLayoutPanel
 
     'Richiesto da Progettazione Windows Form
     Private components As System.ComponentModel.IContainer
@@ -25,105 +20,125 @@ Partial Class SplashScreen1
     'NOTA: la procedura che segue è richiesta da Progettazione Windows Form
     'Può essere modificata in Progettazione Windows Form.  
     'Non modificarla mediante l'editor del codice.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SplashScreen1))
-        Me.MainLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
-        Me.DetailsLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
-        Me.Version = New System.Windows.Forms.Label()
-        Me.Copyright = New System.Windows.Forms.Label()
-        Me.ApplicationTitle = New System.Windows.Forms.Label()
-        Me.MainLayoutPanel.SuspendLayout()
-        Me.DetailsLayoutPanel.SuspendLayout()
+        Me.components = New System.ComponentModel.Container()
+        Dim Appearance1 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
+        Dim Appearance4 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
+        Dim Appearance3 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
+        Dim Appearance2 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.UltraPanel1 = New Infragistics.Win.Misc.UltraPanel()
+        Me.UltraLabelApplicationTitle = New Infragistics.Win.Misc.UltraLabel()
+        Me.UltraButtonInsertCoin = New Infragistics.Win.Misc.UltraButton()
+        Me.UltraLabelCopyright = New Infragistics.Win.Misc.UltraLabel()
+        Me.UltraLabel2 = New Infragistics.Win.Misc.UltraLabel()
+        Me.UltraLabelVersion = New Infragistics.Win.Misc.UltraLabel()
+        Me.UltraPanel1.ClientArea.SuspendLayout()
+        Me.UltraPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'MainLayoutPanel
+        'Timer1
         '
-        Me.MainLayoutPanel.BackgroundImage = CType(resources.GetObject("MainLayoutPanel.BackgroundImage"), System.Drawing.Image)
-        Me.MainLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.MainLayoutPanel.ColumnCount = 2
-        Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 291.0!))
-        Me.MainLayoutPanel.Controls.Add(Me.DetailsLayoutPanel, 1, 1)
-        Me.MainLayoutPanel.Controls.Add(Me.ApplicationTitle, 1, 0)
-        Me.MainLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.MainLayoutPanel.Location = New System.Drawing.Point(0, 0)
-        Me.MainLayoutPanel.Name = "MainLayoutPanel"
-        Me.MainLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.MainLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38.0!))
-        Me.MainLayoutPanel.Size = New System.Drawing.Size(496, 303)
-        Me.MainLayoutPanel.TabIndex = 0
+        Me.Timer1.Interval = 5000
         '
-        'DetailsLayoutPanel
+        'UltraPanel1
         '
-        Me.DetailsLayoutPanel.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.DetailsLayoutPanel.BackColor = System.Drawing.Color.Transparent
-        Me.DetailsLayoutPanel.ColumnCount = 1
-        Me.DetailsLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 247.0!))
-        Me.DetailsLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142.0!))
-        Me.DetailsLayoutPanel.Controls.Add(Me.Copyright, 0, 1)
-        Me.DetailsLayoutPanel.Controls.Add(Me.Version, 0, 0)
-        Me.DetailsLayoutPanel.Location = New System.Drawing.Point(124, 144)
-        Me.DetailsLayoutPanel.Name = "DetailsLayoutPanel"
-        Me.DetailsLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.0!))
-        Me.DetailsLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.0!))
-        Me.DetailsLayoutPanel.Size = New System.Drawing.Size(247, 69)
-        Me.DetailsLayoutPanel.TabIndex = 1
+        Appearance1.ImageBackground = Global.GotScraper.My.Resources.Resources.BarTop
+        Me.UltraPanel1.Appearance = Appearance1
         '
-        'Version
+        'UltraPanel1.ClientArea
         '
-        Me.Version.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Version.BackColor = System.Drawing.Color.Transparent
-        Me.Version.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Version.ForeColor = System.Drawing.Color.White
-        Me.Version.Location = New System.Drawing.Point(3, 7)
-        Me.Version.Name = "Version"
-        Me.Version.Size = New System.Drawing.Size(241, 20)
-        Me.Version.TabIndex = 1
-        Me.Version.Text = "Versione {0}.{1:00}"
+        Me.UltraPanel1.ClientArea.Controls.Add(Me.UltraLabelVersion)
+        Me.UltraPanel1.ClientArea.Controls.Add(Me.UltraLabel2)
+        Me.UltraPanel1.ClientArea.Controls.Add(Me.UltraLabelCopyright)
+        Me.UltraPanel1.ClientArea.Controls.Add(Me.UltraButtonInsertCoin)
+        Me.UltraPanel1.ClientArea.Controls.Add(Me.UltraLabelApplicationTitle)
+        Me.UltraPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.UltraPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.UltraPanel1.Name = "UltraPanel1"
+        Me.UltraPanel1.Size = New System.Drawing.Size(622, 428)
+        Me.UltraPanel1.TabIndex = 3
         '
-        'Copyright
+        'UltraLabelApplicationTitle
         '
-        Me.Copyright.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Copyright.BackColor = System.Drawing.Color.Transparent
-        Me.Copyright.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Copyright.ForeColor = System.Drawing.Color.White
-        Me.Copyright.Location = New System.Drawing.Point(3, 34)
-        Me.Copyright.Name = "Copyright"
-        Me.Copyright.Size = New System.Drawing.Size(241, 35)
-        Me.Copyright.TabIndex = 2
-        Me.Copyright.Text = "Copyright (2017)Scraping using Arcade Database by motoschifo "
+        Appearance4.BackColor = System.Drawing.Color.Transparent
+        Appearance4.ForeColor = System.Drawing.Color.White
+        Me.UltraLabelApplicationTitle.Appearance = Appearance4
+        Me.UltraLabelApplicationTitle.AutoSize = True
+        Me.UltraLabelApplicationTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.UltraLabelApplicationTitle.Location = New System.Drawing.Point(249, 12)
+        Me.UltraLabelApplicationTitle.Name = "UltraLabelApplicationTitle"
+        Me.UltraLabelApplicationTitle.Size = New System.Drawing.Size(137, 31)
+        Me.UltraLabelApplicationTitle.TabIndex = 3
+        Me.UltraLabelApplicationTitle.Text = "GotScraper"
         '
-        'ApplicationTitle
+        'UltraButtonInsertCoin
         '
-        Me.ApplicationTitle.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ApplicationTitle.BackColor = System.Drawing.Color.Transparent
-        Me.ApplicationTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ApplicationTitle.ForeColor = System.Drawing.Color.White
-        Me.ApplicationTitle.Location = New System.Drawing.Point(104, 0)
-        Me.ApplicationTitle.Name = "ApplicationTitle"
-        Me.ApplicationTitle.Size = New System.Drawing.Size(287, 55)
-        Me.ApplicationTitle.TabIndex = 0
-        Me.ApplicationTitle.Text = "GotScraper"
-        Me.ApplicationTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.UltraButtonInsertCoin.Location = New System.Drawing.Point(509, 373)
+        Me.UltraButtonInsertCoin.Name = "UltraButtonInsertCoin"
+        Me.UltraButtonInsertCoin.Size = New System.Drawing.Size(75, 23)
+        Me.UltraButtonInsertCoin.TabIndex = 4
+        Me.UltraButtonInsertCoin.Text = "Insert coin"
+        '
+        'UltraLabelCopyright
+        '
+        Appearance3.BackColor = System.Drawing.Color.Transparent
+        Appearance3.ForeColor = System.Drawing.Color.White
+        Me.UltraLabelCopyright.Appearance = Appearance3
+        Me.UltraLabelCopyright.AutoSize = True
+        Me.UltraLabelCopyright.Location = New System.Drawing.Point(228, 382)
+        Me.UltraLabelCopyright.Name = "UltraLabelCopyright"
+        Me.UltraLabelCopyright.Size = New System.Drawing.Size(139, 14)
+        Me.UltraLabelCopyright.TabIndex = 5
+        Me.UltraLabelCopyright.Text = "Copyright by Gothrek 2017"
+        '
+        'UltraLabel2
+        '
+        Me.UltraLabel2.AutoSize = True
+        Me.UltraLabel2.Location = New System.Drawing.Point(185, 405)
+        Me.UltraLabel2.Name = "UltraLabel2"
+        Me.UltraLabel2.Size = New System.Drawing.Size(242, 14)
+        Me.UltraLabel2.TabIndex = 6
+        Me.UltraLabel2.Text = "Scraping using Arcade Database by motoschifo "
+        '
+        'UltraLabelVersion
+        '
+        Appearance2.BackColor = System.Drawing.Color.Transparent
+        Appearance2.ForeColor = System.Drawing.Color.White
+        Me.UltraLabelVersion.Appearance = Appearance2
+        Me.UltraLabelVersion.AutoSize = True
+        Me.UltraLabelVersion.Location = New System.Drawing.Point(520, 411)
+        Me.UltraLabelVersion.Name = "UltraLabelVersion"
+        Me.UltraLabelVersion.Size = New System.Drawing.Size(99, 14)
+        Me.UltraLabelVersion.TabIndex = 7
+        Me.UltraLabelVersion.Text = "Versione {0}.{1:00}"
         '
         'SplashScreen1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(496, 303)
+        Me.ClientSize = New System.Drawing.Size(622, 428)
         Me.ControlBox = False
-        Me.Controls.Add(Me.MainLayoutPanel)
+        Me.Controls.Add(Me.UltraPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "SplashScreen1"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.MainLayoutPanel.ResumeLayout(False)
-        Me.DetailsLayoutPanel.ResumeLayout(False)
+        Me.UltraPanel1.ClientArea.ResumeLayout(False)
+        Me.UltraPanel1.ClientArea.PerformLayout()
+        Me.UltraPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
 
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents UltraPanel1 As Infragistics.Win.Misc.UltraPanel
+    Friend WithEvents UltraLabel2 As Infragistics.Win.Misc.UltraLabel
+    Friend WithEvents UltraLabelCopyright As Infragistics.Win.Misc.UltraLabel
+    Friend WithEvents UltraButtonInsertCoin As Infragistics.Win.Misc.UltraButton
+    Friend WithEvents UltraLabelApplicationTitle As Infragistics.Win.Misc.UltraLabel
+    Friend WithEvents UltraLabelVersion As Infragistics.Win.Misc.UltraLabel
 End Class

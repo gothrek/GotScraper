@@ -56,7 +56,7 @@ Public Class Form1
         Dim query As String = "query_mame&game_name="
         Dim lingua As String = "it"
 
-        If RadioButton2.Checked Then
+        If UltraRadioButtonGroupManager1.SelectedRadioButton.Text = "Inglese" Then
             lingua = "en"
         End If
 
@@ -72,16 +72,12 @@ Public Class Form1
         response.Close()
     End Function
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub UltraButtonDirectory_Click(sender As Object, e As EventArgs) Handles UltraButtonDirectory.Click
         Dim cartella As String = ""
 
         FolderBrowserDialog1.ShowDialog()
         cartella = FolderBrowserDialog1.SelectedPath
-        Label1.Text = cartella
+        UltraStatusBar1.Panels("Directory").Text = cartella
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -96,6 +92,8 @@ Public Class Form1
         Dim contatore As Integer = 0
         Dim contatoreScartati As Integer = 0
 
+        Dim dir As String = UltraStatusBar1.Panels("Directory").Text
+
         If File.Exists(FILE_NAME) = True Then 'se esite un file di log lo cancelliamo
             File.Delete(FILE_NAME)
         End If
@@ -106,10 +104,11 @@ Public Class Form1
 
         Dim inizio As DateTime = Now
 
-        For Each file As String In Directory.GetFiles(Label1.Text)
+        For Each file As String In Directory.GetFiles(UltraStatusBar1.Panels("Directory").Text)
 
-            game = file.Substring(Label1.Text.Length + 1, file.Length - Label1.Text.Length - 5)
-            Label2.Text = game
+            game = file.Substring(UltraStatusBar1.Panels("Directory").Text.Length + 1, file.Length - UltraStatusBar1.Panels("Directory").Text.Length - 5)
+            UltraStatusBar1.Panels("Directory").Text = game
+            UltraStatusBar1.Refresh()
 
             info = CercaArcadeDatabase(game)
             If info.Chars(11) <> "]" Then
@@ -118,7 +117,7 @@ Public Class Form1
                 sw.WriteLine(game & " - " & crc32 & " - " & info)
                 contatore += 1
             Else
-                game = file.Substring(Label1.Text.Length + 1, file.Length - Label1.Text.Length - 1)
+                game = file.Substring(UltraStatusBar1.Panels("Directory").Text.Length + 1, file.Length - UltraStatusBar1.Panels("Directory").Text.Length - 1)
                 sw.WriteLine(game & " - Fallito")
                 contatoreScartati += 1
             End If
@@ -126,11 +125,14 @@ Public Class Form1
         Dim fine As DateTime = Now
         sw.Close()
 
+        UltraStatusBar1.Panels("Directory").Text = dir
+        UltraStatusBar1.Refresh()
+
         MsgBox("Scansione terminata! Elementi individuati:" & contatore & " in " & fine.Subtract(inizio).Seconds)
 
     End Sub
 
-    Dim filePath As String = "c:\Demo.xml"
+    Dim filePath As String = "d:\Demo.xml"
 
     Private Sub CreFileDemoXML(ByVal filePaths As String)
         Dim Scrivi As New XmlTextWriter(filePaths, System.Text.Encoding.UTF8)
@@ -174,4 +176,5 @@ Public Class Form1
         'Creo il file XML Demo.xml che contiene i valori
         CreFileDemoXML(filePath)
     End Sub
+
 End Class
