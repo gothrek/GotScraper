@@ -81,7 +81,12 @@ Public Class Form1
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Dim FILE_NAME As String = "log.txt"
+        Dim fileXML_name As String = "gamelist.xml" 'nome di default della piattaforma recalbox
+        Dim images_path As String = UltraStatusBar1.Panels("Directory").Text & "\downloaded_images" 'directory di default della piattaforma recalbox
+        Dim fileXML_path As String = UltraStatusBar1.Panels("Directory").Text 'directory di default del file XML 
+        Dim rom_path As String = UltraStatusBar1.Panels("Directory").Text 'directory delle rom su cui è stata fatta la scansione 
+        Dim filelog_name As String = "log.txt" 'nome del file di log
+
         Dim sw As StreamWriter
         Dim fs As FileStream = Nothing
 
@@ -92,21 +97,34 @@ Public Class Form1
         Dim contatore As Integer = 0
         Dim contatoreScartati As Integer = 0
 
-        Dim dir As String = UltraStatusBar1.Panels("Directory").Text
+        Try 'se non esiste la directory delle immagini la creiamo
+            Directory.CreateDirectory(images_path)
+        Catch ex As Exception
 
-        If File.Exists(FILE_NAME) = True Then 'se esite un file di log lo cancelliamo
-            File.Delete(FILE_NAME)
-        End If
+        End Try
 
-        fs = File.Create(FILE_NAME)
+        Try 'se esite un file di log lo cancelliamo
+            File.Delete(filelog_name)
+        Catch ex As Exception
+
+        End Try
+
+        fs = File.Create(filelog_name)
         fs.Close()
-        sw = File.AppendText(FILE_NAME)
+        sw = File.AppendText(filelog_name)
 
         Dim inizio As DateTime = Now
 
+        Dim Scrivi As New XmlTextWriter(fileXML_path & "\" & fileXML_name, System.Text.Encoding.UTF8)
+
+        Scrivi.WriteStartDocument(True)
+        Scrivi.Formatting = Formatting.Indented
+        Scrivi.Indentation = 2
+        Scrivi.WriteStartElement("gameList")
+
         For Each file As String In Directory.GetFiles(UltraStatusBar1.Panels("Directory").Text)
 
-            game = file.Substring(UltraStatusBar1.Panels("Directory").Text.Length + 1, file.Length - UltraStatusBar1.Panels("Directory").Text.Length - 5)
+            game = file.Substring(rom_path.Length + 1, file.Length - rom_path.Length - 5)
             UltraStatusBar1.Panels("Directory").Text = game
             UltraStatusBar1.Refresh()
 
@@ -116,65 +134,75 @@ Public Class Form1
 
                 sw.WriteLine(game & " - " & crc32 & " - " & info)
                 contatore += 1
+
+                'TODO check crc32
+                'TODO comporre correttamente la stringa e i parametri
+                createNodo(1, "172-32-1176", "TOSHIBA", "e-STUDIO456SE", "Multifunzione TOSHIBA a e-STUDIO456SE", True, Scrivi)
+
             Else
-                game = file.Substring(UltraStatusBar1.Panels("Directory").Text.Length + 1, file.Length - UltraStatusBar1.Panels("Directory").Text.Length - 1)
+                game = file.Substring(rom_path.Length + 1, file.Length - rom_path.Length - 1)
                 sw.WriteLine(game & " - Fallito")
                 contatoreScartati += 1
             End If
         Next
+
         Dim fine As DateTime = Now
+
         sw.Close()
 
-        UltraStatusBar1.Panels("Directory").Text = dir
-        UltraStatusBar1.Refresh()
-
-        MsgBox("Scansione terminata! Elementi individuati:" & contatore & " in " & fine.Subtract(inizio).Seconds)
-
-    End Sub
-
-    Dim filePath As String = "d:\Demo.xml"
-
-    Private Sub CreFileDemoXML(ByVal filePaths As String)
-        Dim Scrivi As New XmlTextWriter(filePaths, System.Text.Encoding.UTF8)
-        Scrivi.WriteStartDocument(True)
-        Scrivi.Formatting = Formatting.Indented
-        Scrivi.Indentation = 2
-        Scrivi.WriteStartElement("Articoli_Table")
-        createNodo(1, "172-32-1176", "TOSHIBA", "e-STUDIO456SE", "Multifunzione TOSHIBA a e-STUDIO456SE", True, Scrivi)
-        createNodo(2, "172-32-1174", "TOSHIBA", "e-STUDIO356SE", "Multifunzione TOSHIBA a e-STUDIO356SE", False, Scrivi)
         Scrivi.WriteEndElement()
         Scrivi.WriteEndDocument()
         Scrivi.Close()
+
+        UltraStatusBar1.Panels("Directory").Text = rom_path
+        UltraStatusBar1.Refresh()
+
+        MsgBox("Scansione terminata! Elementi individuati:" & contatore & " in " & fine.Subtract(inizio).Minutes * 60 + fine.Subtract(inizio).Seconds)
+
     End Sub
 
     Private Sub createNodo(ByVal pId As String, ByVal pCode As String, ByVal pMarca As String,
                               ByVal pModello As String, ByVal pDescrizione As String,
                               ByVal pOfferta As Boolean, ByVal scrivi As XmlTextWriter)
-        scrivi.WriteStartElement("articolo")
-        scrivi.WriteStartElement("Id")
-        scrivi.WriteString(pId)
-        scrivi.WriteEndElement()
-        scrivi.WriteStartElement("Codice")
-        scrivi.WriteString(pCode)
-        scrivi.WriteEndElement()
-        scrivi.WriteStartElement("Marca")
-        scrivi.WriteString(pMarca)
-        scrivi.WriteEndElement()
-        scrivi.WriteStartElement("Modello")
-        scrivi.WriteString(pModello)
-        scrivi.WriteEndElement()
-        scrivi.WriteStartElement("Descrizione")
-        scrivi.WriteString(pDescrizione)
-        scrivi.WriteEndElement()
-        scrivi.WriteStartElement("Offerta")
-        scrivi.WriteString(pOfferta)
-        scrivi.WriteEndElement()
-        scrivi.WriteEndElement()
-    End Sub
 
-    Private Sub ReadFileXML_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        'Creo il file XML Demo.xml che contiene i valori
-        CreFileDemoXML(filePath)
+        Dim sito As String = "ArcadeDataBase"
+        Dim id As String = ""
+
+        scrivi.WriteStartElement("game id=" & id & " source=" & sito)
+        scrivi.WriteStartElement("path")
+        'scrivi.WriteString("./" & rom_name)
+        scrivi.WriteEndElement()
+        scrivi.WriteStartElement("name")
+        'scrivi.WriteString(pCode)
+        scrivi.WriteEndElement()
+        scrivi.WriteStartElement("desc")
+        'scrivi.WriteString(pMarca)
+        scrivi.WriteEndElement()
+        scrivi.WriteStartElement("image")
+        'scrivi.WriteString(pModello)
+        scrivi.WriteEndElement()
+        scrivi.WriteStartElement("rating")
+        'scrivi.WriteString(pDescrizione)
+        scrivi.WriteEndElement()
+        scrivi.WriteStartElement("releasedate")
+        ' scrivi.WriteString(pOfferta)
+        scrivi.WriteEndElement()
+        scrivi.WriteStartElement("developer")
+        'scrivi.WriteString("./" & rom_name)
+        scrivi.WriteEndElement()
+        scrivi.WriteStartElement("publisher")
+        'scrivi.WriteString(pCode)
+        scrivi.WriteEndElement()
+        scrivi.WriteStartElement("genre")
+        'scrivi.WriteString(pMarca)
+        scrivi.WriteEndElement()
+        scrivi.WriteStartElement("players")
+        'scrivi.WriteString(pModello)
+        scrivi.WriteEndElement()
+        scrivi.WriteStartElement("region")
+        'scrivi.WriteString(pDescrizione)
+        scrivi.WriteEndElement()
+        scrivi.WriteEndElement()
     End Sub
 
 End Class
