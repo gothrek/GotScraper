@@ -23,53 +23,37 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim Appearance4 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
+        Dim Appearance1 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
         Dim Appearance2 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
-        Dim Appearance5 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
+        Dim Appearance3 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
         Dim UltraStatusPanel1 As Infragistics.Win.UltraWinStatusBar.UltraStatusPanel = New Infragistics.Win.UltraWinStatusBar.UltraStatusPanel()
         Dim UltraStatusPanel2 As Infragistics.Win.UltraWinStatusBar.UltraStatusPanel = New Infragistics.Win.UltraWinStatusBar.UltraStatusPanel()
         Dim UltraStatusPanel4 As Infragistics.Win.UltraWinStatusBar.UltraStatusPanel = New Infragistics.Win.UltraWinStatusBar.UltraStatusPanel()
         Dim UltraStatusPanel3 As Infragistics.Win.UltraWinStatusBar.UltraStatusPanel = New Infragistics.Win.UltraWinStatusBar.UltraStatusPanel()
+        Me.UltraButtonDirectory = New Infragistics.Win.Misc.UltraButton()
+        Me.UltraRadioButtonItaliano = New Infragistics.Win.UltraWinEditors.UltraRadioButton()
+        Me.UltraRadioButtonGroupManager1 = New Infragistics.Win.UltraWinEditors.UltraRadioButtonGroupManager(Me.components)
+        Me.UltraRadioButtonEnglish = New Infragistics.Win.UltraWinEditors.UltraRadioButton()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.UltraRadioButtonGroupManager1 = New Infragistics.Win.UltraWinEditors.UltraRadioButtonGroupManager(Me.components)
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.UltraButtonDirectory = New Infragistics.Win.Misc.UltraButton()
-        Me.UltraRadioButtonEnglish = New Infragistics.Win.UltraWinEditors.UltraRadioButton()
-        Me.UltraRadioButtonItaliano = New Infragistics.Win.UltraWinEditors.UltraRadioButton()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.UltraButtonScan = New Infragistics.Win.Misc.UltraButton()
         Me.UltraStatusBar1 = New Infragistics.Win.UltraWinStatusBar.UltraStatusBar()
-        CType(Me.UltraRadioButtonGroupManager1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
-        CType(Me.UltraRadioButtonEnglish, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.UltraRadioButtonItaliano, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.UltraRadioButtonGroupManager1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.UltraRadioButtonEnglish, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         CType(Me.UltraStatusBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.UltraStatusBar1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'OpenFileDialog1
-        '
-        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-        '
-        'Panel1
-        '
-        Me.Panel1.BackgroundImage = Global.GotScraper.My.Resources.Resources.BarTop
-        Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Panel1.Controls.Add(Me.UltraStatusBar1)
-        Me.Panel1.Controls.Add(Me.Button3)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(503, 426)
-        Me.Panel1.TabIndex = 1
-        '
         'UltraButtonDirectory
         '
-        Appearance4.BackColor = System.Drawing.Color.Transparent
-        Appearance4.ForeColor = System.Drawing.Color.Transparent
-        Appearance4.ImageBackground = Global.GotScraper.My.Resources.Resources.folder
-        Me.UltraButtonDirectory.Appearance = Appearance4
+        Appearance1.BackColor = System.Drawing.Color.Transparent
+        Appearance1.ForeColor = System.Drawing.Color.Transparent
+        Appearance1.ImageBackground = Global.GotScraper.My.Resources.Resources.folder
+        Me.UltraButtonDirectory.Appearance = Appearance1
         Me.UltraButtonDirectory.Location = New System.Drawing.Point(1, 3)
         Me.UltraButtonDirectory.Name = "UltraButtonDirectory"
         Me.UltraButtonDirectory.Size = New System.Drawing.Size(30, 28)
@@ -77,26 +61,11 @@ Partial Class Form1
         Me.UltraButtonDirectory.Text = "Directory"
         Me.UltraButtonDirectory.UseOsThemes = Infragistics.Win.DefaultableBoolean.[False]
         '
-        'UltraRadioButtonEnglish
-        '
-        Appearance2.ForeColor = System.Drawing.Color.Transparent
-        Appearance2.ImageBackground = Global.GotScraper.My.Resources.Resources.english_flag
-        Me.UltraRadioButtonEnglish.Appearance = Appearance2
-        Me.UltraRadioButtonEnglish.BackColor = System.Drawing.Color.Transparent
-        Me.UltraRadioButtonEnglish.BackColorInternal = System.Drawing.Color.Transparent
-        Me.UltraRadioButtonEnglish.GroupManager = Me.UltraRadioButtonGroupManager1
-        Me.UltraRadioButtonEnglish.Location = New System.Drawing.Point(472, 3)
-        Me.UltraRadioButtonEnglish.Name = "UltraRadioButtonEnglish"
-        Me.UltraRadioButtonEnglish.Size = New System.Drawing.Size(30, 28)
-        Me.UltraRadioButtonEnglish.TabIndex = 8
-        Me.UltraRadioButtonEnglish.TabStop = False
-        Me.UltraRadioButtonEnglish.Text = "Inglese"
-        '
         'UltraRadioButtonItaliano
         '
-        Appearance5.ForeColor = System.Drawing.Color.Transparent
-        Appearance5.ImageBackground = Global.GotScraper.My.Resources.Resources.italian_flag
-        Me.UltraRadioButtonItaliano.Appearance = Appearance5
+        Appearance2.ForeColor = System.Drawing.Color.Transparent
+        Appearance2.ImageBackground = Global.GotScraper.My.Resources.Resources.italian_flag
+        Me.UltraRadioButtonItaliano.Appearance = Appearance2
         Me.UltraRadioButtonItaliano.BackColor = System.Drawing.Color.Transparent
         Me.UltraRadioButtonItaliano.BackColorInternal = System.Drawing.Color.Transparent
         Me.UltraRadioButtonItaliano.Checked = True
@@ -108,14 +77,45 @@ Partial Class Form1
         Me.UltraRadioButtonItaliano.Tag = "    "
         Me.UltraRadioButtonItaliano.Text = "Italiano"
         '
-        'Button3
+        'UltraRadioButtonEnglish
         '
-        Me.Button3.Location = New System.Drawing.Point(216, 200)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 23)
-        Me.Button3.TabIndex = 3
-        Me.Button3.Text = "Scan"
-        Me.Button3.UseVisualStyleBackColor = True
+        Appearance3.ForeColor = System.Drawing.Color.Transparent
+        Appearance3.ImageBackground = Global.GotScraper.My.Resources.Resources.english_flag
+        Me.UltraRadioButtonEnglish.Appearance = Appearance3
+        Me.UltraRadioButtonEnglish.BackColor = System.Drawing.Color.Transparent
+        Me.UltraRadioButtonEnglish.BackColorInternal = System.Drawing.Color.Transparent
+        Me.UltraRadioButtonEnglish.GroupManager = Me.UltraRadioButtonGroupManager1
+        Me.UltraRadioButtonEnglish.Location = New System.Drawing.Point(472, 3)
+        Me.UltraRadioButtonEnglish.Name = "UltraRadioButtonEnglish"
+        Me.UltraRadioButtonEnglish.Size = New System.Drawing.Size(30, 28)
+        Me.UltraRadioButtonEnglish.TabIndex = 8
+        Me.UltraRadioButtonEnglish.TabStop = False
+        Me.UltraRadioButtonEnglish.Text = "Inglese"
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
+        'Panel1
+        '
+        Me.Panel1.BackgroundImage = Global.GotScraper.My.Resources.Resources.BarTop
+        Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Panel1.Controls.Add(Me.UltraButtonScan)
+        Me.Panel1.Controls.Add(Me.UltraStatusBar1)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(503, 426)
+        Me.Panel1.TabIndex = 1
+        '
+        'UltraButtonScan
+        '
+        Me.UltraButtonScan.Enabled = False
+        Me.UltraButtonScan.Location = New System.Drawing.Point(237, 132)
+        Me.UltraButtonScan.Name = "UltraButtonScan"
+        Me.UltraButtonScan.Size = New System.Drawing.Size(75, 23)
+        Me.UltraButtonScan.TabIndex = 11
+        Me.UltraButtonScan.Text = "Scan"
         '
         'UltraStatusBar1
         '
@@ -154,10 +154,10 @@ Partial Class Form1
         Me.MinimizeBox = False
         Me.Name = "Form1"
         Me.Text = "GotScraper - Video Games Scraper x windows by Gothrek"
-        CType(Me.UltraRadioButtonGroupManager1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel1.ResumeLayout(False)
-        CType(Me.UltraRadioButtonEnglish, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.UltraRadioButtonItaliano, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.UltraRadioButtonGroupManager1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.UltraRadioButtonEnglish, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
         CType(Me.UltraStatusBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.UltraStatusBar1.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -166,11 +166,11 @@ Partial Class Form1
     Friend WithEvents Panel1 As Panel
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
-    Friend WithEvents Button3 As Button
     Friend WithEvents Timer1 As Timer
     Private WithEvents UltraRadioButtonGroupManager1 As Infragistics.Win.UltraWinEditors.UltraRadioButtonGroupManager
     Friend WithEvents UltraRadioButtonEnglish As Infragistics.Win.UltraWinEditors.UltraRadioButton
     Friend WithEvents UltraRadioButtonItaliano As Infragistics.Win.UltraWinEditors.UltraRadioButton
     Friend WithEvents UltraButtonDirectory As Infragistics.Win.Misc.UltraButton
     Friend WithEvents UltraStatusBar1 As Infragistics.Win.UltraWinStatusBar.UltraStatusBar
+    Friend WithEvents UltraButtonScan As Infragistics.Win.Misc.UltraButton
 End Class
