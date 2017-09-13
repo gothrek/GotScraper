@@ -1,0 +1,4 @@
+https://www.screenscraper.fr/api/jeuInfos.php?devid=Gothrek&devpassword=pk220475&softname=zzz&output=xml&ssid=Gothrek&sspassword=pk220475&crc=50ABC90A&systemeid=1&romtype=rom&romnom=Sonic%20The%20Hedgehog%202%20%20(%20mondiale)%20.zip%20=%20749.652%20&%20romtaille
+
+
+https://www.screenscraper.fr/api/jeuInfos.php?devid=Gothrek&devpassword=pk220475&softname=zzz&output=xml&ssid=Gothrek&sspassword=pk220475&crc=74E2A3BF&systemeid=1&romtype=rom

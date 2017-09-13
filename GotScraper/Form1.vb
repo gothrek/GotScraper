@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Xml
+Imports Newtonsoft.Json
 
 Public Class Form1
     Dim fileXML_name As String = "gamelist.xml" 'nome di default della piattaforma recalbox
@@ -77,7 +78,6 @@ Public Class Form1
         response.Close()
     End Function
 
-
     Private Sub createNodo(ByVal stringa As String(), ByVal scrivi As XmlTextWriter, ByVal sito As String, ByVal url_images As String)
 
         scrivi.WriteStartElement("game")
@@ -93,6 +93,7 @@ Public Class Form1
         scrivi.WriteString(stringa(15) & " " & stringa(16))
         scrivi.WriteEndElement()
         scrivi.WriteStartElement("image")
+
         Try
             Dim Client As New WebClient
 
@@ -106,7 +107,13 @@ Public Class Form1
 
         scrivi.WriteEndElement()
         scrivi.WriteStartElement("rating")
-        'scrivi.WriteString(pDescrizione)
+
+        Try
+            scrivi.WriteString(Int(stringa(24)) / 100)
+        Catch ex As Exception
+            scrivi.WriteString(stringa(24))
+        End Try
+
         scrivi.WriteEndElement()
         scrivi.WriteStartElement("releasedate")
         scrivi.WriteString(stringa(13) & "0101T000000")
@@ -121,17 +128,21 @@ Public Class Form1
         scrivi.WriteString(stringa(11))
         scrivi.WriteEndElement()
         scrivi.WriteStartElement("players")
-        scrivi.WriteString(stringa(12))
+
+        Try
+            scrivi.WriteString(Int(stringa(12)))
+        Catch ex As Exception
+            scrivi.WriteString(stringa(12))
+        End Try
+
         scrivi.WriteEndElement()
         scrivi.WriteStartElement("region")
-        'scrivi.WriteString(pDescrizione)
+        scrivi.WriteString(stringa(23))
         scrivi.WriteEndElement()
         scrivi.WriteEndElement()
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-
 
     End Sub
 
@@ -191,17 +202,26 @@ Public Class Form1
         Dim Scrivi As New XmlTextWriter(fileXML_path & "\" & fileXML_name, System.Text.Encoding.UTF8)
 
         Scrivi.WriteStartDocument(True)
-        Scrivi.Formatting = Formatting.Indented
+        Scrivi.Formatting = System.Xml.Formatting.Indented
         Scrivi.Indentation = 2
         Scrivi.WriteStartElement("gameList")
 
         For Each file As String In Directory.GetFiles(rom_path)
+            'Dim jss As New System.Web.Script.Serialization.JavaScriptSerializer
 
             game = file.Substring(rom_path.Length + 1, file.Length - rom_path.Length - 5)
             UltraStatusBar1.Panels("Directory").Text = game
             UltraStatusBar1.Refresh()
 
             info = CercaArcadeDatabase(game)
+
+            'Dim exampleJson As String = info '"{ 'no':'123', 'name':'Some Name', 'com':'This is a comment'}"
+            'Dim tempPost = New With {Key .release = ""}
+            'Dim post = JsonConvert.DeserializeAnonymousType(exampleJson, tempPost)
+            Dim dati As Newtonsoft.Json.Linq.JObject = JsonConvert.DeserializeObject(Of Object)(info)
+            'Dim com As String = post.result
+            'Dim com As Integer = dati.Item("result").Item(0).Item("players")
+
             If info.Chars(11) <> "]" Then
                 crc32 = GetCRC32(file)
 
