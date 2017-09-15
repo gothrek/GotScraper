@@ -31,13 +31,13 @@ Partial Class SplashScreen1
         Dim Appearance5 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.UltraPanel1 = New Infragistics.Win.Misc.UltraPanel()
+        Me.UltraPanel2 = New Infragistics.Win.Misc.UltraPanel()
         Me.UltraFormattedLinkLabel1 = New Infragistics.Win.FormattedLinkLabel.UltraFormattedLinkLabel()
         Me.UltraLabelVersion = New Infragistics.Win.Misc.UltraLabel()
         Me.UltraLabelCopyright = New Infragistics.Win.Misc.UltraLabel()
         Me.UltraButtonInsertCoin = New Infragistics.Win.Misc.UltraButton()
         Me.UltraLabelApplicationTitle = New Infragistics.Win.Misc.UltraLabel()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
-        Me.UltraPanel2 = New Infragistics.Win.Misc.UltraPanel()
         Me.UltraPanel1.ClientArea.SuspendLayout()
         Me.UltraPanel1.SuspendLayout()
         Me.UltraPanel2.ClientArea.SuspendLayout()
@@ -65,6 +65,17 @@ Partial Class SplashScreen1
         Me.UltraPanel1.Name = "UltraPanel1"
         Me.UltraPanel1.Size = New System.Drawing.Size(622, 428)
         Me.UltraPanel1.TabIndex = 3
+        '
+        'UltraPanel2
+        '
+        '
+        'UltraPanel2.ClientArea
+        '
+        Me.UltraPanel2.ClientArea.Controls.Add(Me.UltraFormattedLinkLabel1)
+        Me.UltraPanel2.Location = New System.Drawing.Point(418, 70)
+        Me.UltraPanel2.Name = "UltraPanel2"
+        Me.UltraPanel2.Size = New System.Drawing.Size(130, 100)
+        Me.UltraPanel2.TabIndex = 9
         '
         'UltraFormattedLinkLabel1
         '
@@ -119,6 +130,7 @@ Partial Class SplashScreen1
         Appearance5.BackColor = System.Drawing.Color.Transparent
         Appearance5.ForeColor = System.Drawing.Color.Red
         Appearance5.ImageBackground = Global.GotScraper.My.Resources.Resources.Nintendo_Logo_bordo
+        Appearance5.TextHAlignAsString = "Center"
         Me.UltraLabelApplicationTitle.Appearance = Appearance5
         Me.UltraLabelApplicationTitle.Font = New System.Drawing.Font("Perpetua", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.UltraLabelApplicationTitle.Location = New System.Drawing.Point(208, 3)
@@ -129,17 +141,6 @@ Partial Class SplashScreen1
         '
         'Timer2
         '
-        '
-        'UltraPanel2
-        '
-        '
-        'UltraPanel2.ClientArea
-        '
-        Me.UltraPanel2.ClientArea.Controls.Add(Me.UltraFormattedLinkLabel1)
-        Me.UltraPanel2.Location = New System.Drawing.Point(418, 70)
-        Me.UltraPanel2.Name = "UltraPanel2"
-        Me.UltraPanel2.Size = New System.Drawing.Size(130, 100)
-        Me.UltraPanel2.TabIndex = 9
         '
         'SplashScreen1
         '
