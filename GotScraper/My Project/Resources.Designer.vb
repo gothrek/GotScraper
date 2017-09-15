@@ -73,6 +73,26 @@ Namespace My.Resources
         '''<summary>
         '''  Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property Classic_NES_Controller_nintendo_5433196_500_375() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Classic-NES-Controller-nintendo-5433196-500-375", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Classicbottone() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Classicbottone", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property english_flag() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("english_flag", resourceCulture)
@@ -96,6 +116,16 @@ Namespace My.Resources
         Friend ReadOnly Property italian_flag() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("italian_flag", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Nintendo_Logo_bordo() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Nintendo-Logo bordo", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

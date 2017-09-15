@@ -27,7 +27,7 @@
         '
         '    Version.Text = System.String.Format(Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
 
-        UltraLabelVersion.Text = System.String.Format(UltraLabelVersion.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor)
+        UltraLabelVersion.Text = System.String.Format(UltraLabelVersion.Text, My.Application.Info.Version.Major, My.Application.Info.Version.MinorRevision)
 
         'Informazioni sul copyright
         UltraLabelCopyright.Text = My.Application.Info.Copyright

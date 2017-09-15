@@ -9,6 +9,7 @@ Public Class Form1
     Dim images_path As String = "" 'UltraStatusBar1.Panels("Directory").Text & "\downloaded_images" 'directory di default della piattaforma recalbox
     Dim rom_path As String = "" 'UltraStatusBar1.Panels("Directory").Text 'directory delle rom su cui è stata fatta la scansione 
     Dim filelog_name As String = "log.txt" 'nome del file di log
+    Dim fileini_name As String = "config.ini" 'nome del file di configurazione del programma
 
     Public Function GetCRC32(ByVal sFileName As String) As String
         Try
@@ -78,28 +79,28 @@ Public Class Form1
         response.Close()
     End Function
 
-    Private Sub createNodo(ByVal stringa As String(), ByVal scrivi As XmlTextWriter, ByVal sito As String, ByVal url_images As String)
+    Private Sub createNodoJSON(ByVal stringa As Newtonsoft.Json.Linq.JObject, ByVal scrivi As XmlTextWriter, ByVal sito As String, ByVal url_images As String)
 
         scrivi.WriteStartElement("game")
-        scrivi.WriteAttributeString("id", stringa(21) & " - " & stringa(2))
+        scrivi.WriteAttributeString("id", stringa.Item("result").Item(0).Item("emulator_id").ToString & " - " & stringa.Item("result").Item(0).Item("game_name").ToString)
         scrivi.WriteAttributeString("source", sito)
         scrivi.WriteStartElement("path")
-        scrivi.WriteString("./" & stringa(2) & ".zip")
+        scrivi.WriteString("./" & stringa.Item("result").Item(0).Item("game_name").ToString & ".zip")
         scrivi.WriteEndElement()
         scrivi.WriteStartElement("name")
-        scrivi.WriteString(stringa(3))
+        scrivi.WriteString(stringa.Item("result").Item(0).Item("title").ToString)
         scrivi.WriteEndElement()
         scrivi.WriteStartElement("desc")
-        scrivi.WriteString(stringa(15) & " " & stringa(16))
+        scrivi.WriteString(stringa.Item("result").Item(0).Item("history").ToString & " " & stringa.Item("result").Item(0).Item("history_copyright_short").ToString)
         scrivi.WriteEndElement()
         scrivi.WriteStartElement("image")
 
         Try
             Dim Client As New WebClient
 
-            Client.DownloadFile(url_images & stringa(2) & ".png", images_path & "/" & stringa(2) & ".png")
+            Client.DownloadFile(url_images & stringa.Item("result").Item(0).Item("game_name").ToString & ".png", images_path & "/" & stringa.Item("result").Item(0).Item("game_name").ToString & ".png")
             Client.Dispose()
-            scrivi.WriteString("./downloaded_images/" & stringa(2) & ".png")
+            scrivi.WriteString("./downloaded_images/" & stringa.Item("result").Item(0).Item("game_name").ToString & ".png")
         Catch ex As Exception
             'TODO se non trovato creare immagine standard
 
@@ -109,45 +110,81 @@ Public Class Form1
         scrivi.WriteStartElement("rating")
 
         Try
-            scrivi.WriteString(Int(stringa(24)) / 100)
+            scrivi.WriteString(Int(stringa.Item("result").Item(0).Item("rate").ToString) / 100)
         Catch ex As Exception
-            scrivi.WriteString(stringa(24))
+            scrivi.WriteString(stringa.Item("result").Item(0).Item("rate").ToString)
         End Try
 
         scrivi.WriteEndElement()
         scrivi.WriteStartElement("releasedate")
-        scrivi.WriteString(stringa(13) & "0101T000000")
+        scrivi.WriteString(stringa.Item("result").Item(0).Item("year").ToString & "0101T000000")
         scrivi.WriteEndElement()
         scrivi.WriteStartElement("developer")
-        scrivi.WriteString(stringa(5))
+        scrivi.WriteString(stringa.Item("result").Item(0).Item("manufacturer").ToString)
         scrivi.WriteEndElement()
         scrivi.WriteStartElement("publisher")
         'scrivi.WriteString(pCode)
         scrivi.WriteEndElement()
         scrivi.WriteStartElement("genre")
-        scrivi.WriteString(stringa(11))
+        scrivi.WriteString(stringa.Item("result").Item(0).Item("genre").ToString)
         scrivi.WriteEndElement()
         scrivi.WriteStartElement("players")
 
         Try
-            scrivi.WriteString(Int(stringa(12)))
+            scrivi.WriteString(Int(stringa.Item("result").Item(0).Item("players").ToString))
         Catch ex As Exception
-            scrivi.WriteString(stringa(12))
+            scrivi.WriteString(stringa.Item("result").Item(0).Item("players").ToString)
         End Try
 
         scrivi.WriteEndElement()
         scrivi.WriteStartElement("region")
-        scrivi.WriteString(stringa(23))
+        scrivi.WriteString(stringa.Item("result").Item(0).Item("languages").ToString)
         scrivi.WriteEndElement()
         scrivi.WriteEndElement()
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Caricamento dati da file config.ini
+
+        Dim fs As FileStream = Nothing
+        Dim INI As FileIni
+
+        If Not File.Exists(fileini_name) Then
+            fs = File.Create(fileini_name)
+            fs.Close()
+
+            INI = New FileIni(fileini_name)
+            INI.Carica()
+
+            INI.Add(New Sezione("Path RecalBox", "Configurazione RecalBox"))
+
+            With INI.Last
+                .Add(New Parametro("Path", "C:\"))
+                .Add(New Parametro("FileXML", fileXML_name))
+            End With
+
+            INI.Salva()
+
+        End If
+
+        INI = New FileIni(fileini_name)
+        INI.Carica()
+
+        UltraStatusBar1.Panels("Directory").Text = INI.GetSezioneByNome("Path RecalBox").GetParametroByNome("Path").Valore
+
+        If UltraStatusBar1.Panels("Directory").Text <> "" Then
+            UltraButtonScan.Enabled = True
+        Else
+            UltraButtonScan.Enabled = False
+        End If
 
     End Sub
 
     Private Sub UltraButtonDirectory_Click(sender As Object, e As EventArgs) Handles UltraButtonDirectory.Click
         Dim cartella As String = ""
+        Dim INI = New FileIni(fileini_name)
+
+        INI.Carica()
 
         FolderBrowserDialog1.ShowDialog()
 
@@ -159,6 +196,9 @@ Public Class Form1
         Else
             UltraButtonScan.Enabled = False
         End If
+
+        INI.GetSezioneByNome("Path RecalBox").GetParametroByNome("Path").Valore = cartella
+        INI.Salva()
 
     End Sub
 
@@ -177,15 +217,15 @@ Public Class Form1
         Dim contatore As Integer = 0
         Dim contatoreScartati As Integer = 0
 
-        Try 'se non esiste la directory delle immagini la creiamo
-            Directory.CreateDirectory(images_path)
-        Catch ex As Exception
-
-        End Try
-
         fileXML_path = UltraStatusBar1.Panels("Directory").Text 'directory di default del file XML 
         images_path = UltraStatusBar1.Panels("Directory").Text & "\downloaded_images" 'directory di default della piattaforma recalbox
         rom_path = UltraStatusBar1.Panels("Directory").Text 'directory delle rom su cui è stata fatta la scansione 
+
+        Try 'se non esiste la directory delle immagini la creiamo
+            Directory.CreateDirectory(images_path)
+        Catch ex As Exception
+            MsgBox("Errore durante la creazione della directory!!", MsgBoxStyle.Critical)
+        End Try
 
         Try 'se esite un file di log lo cancelliamo
             File.Delete(filelog_name)
@@ -207,7 +247,6 @@ Public Class Form1
         Scrivi.WriteStartElement("gameList")
 
         For Each file As String In Directory.GetFiles(rom_path)
-            'Dim jss As New System.Web.Script.Serialization.JavaScriptSerializer
 
             game = file.Substring(rom_path.Length + 1, file.Length - rom_path.Length - 5)
             UltraStatusBar1.Panels("Directory").Text = game
@@ -215,39 +254,16 @@ Public Class Form1
 
             info = CercaArcadeDatabase(game)
 
-            'Dim exampleJson As String = info '"{ 'no':'123', 'name':'Some Name', 'com':'This is a comment'}"
-            'Dim tempPost = New With {Key .release = ""}
-            'Dim post = JsonConvert.DeserializeAnonymousType(exampleJson, tempPost)
             Dim dati As Newtonsoft.Json.Linq.JObject = JsonConvert.DeserializeObject(Of Object)(info)
-            'Dim com As String = post.result
-            'Dim com As Integer = dati.Item("result").Item(0).Item("players")
 
-            If info.Chars(11) <> "]" Then
+            If dati.Item("result").Count >= 1 Then
                 crc32 = GetCRC32(file)
 
                 sw.WriteLine(game & ".zip - " & crc32 & " - " & info)
                 contatore += 1
 
                 'TODO check crc32
-                'TODO comporre correttamente la stringa con il sito
-                Dim stringa As String = "," & Chr(34)
-                Dim parts As String() = Split(info, stringa, , CompareMethod.Text)
-                Dim contaPart As Integer = 0
-
-                For Each part As String In parts
-                    Try
-                        Dim inizioStringa As Integer = part.IndexOf(Chr(34) & ":" & Chr(34))
-
-                        parts(contaPart) = part.Substring(inizioStringa + 3, part.Length - inizioStringa - 3 - 1)
-                        contaPart += 1
-                    Catch ex As Exception
-
-                    End Try
-
-                Next
-
-                createNodo(parts, Scrivi, sito, url_images)
-
+                createNodoJSON(dati, Scrivi, sito, url_images)
 
             Else
                 game = file.Substring(rom_path.Length + 1, file.Length - rom_path.Length - 1)
@@ -267,7 +283,7 @@ Public Class Form1
         UltraStatusBar1.Panels("Directory").Text = rom_path
         UltraStatusBar1.Refresh()
 
-        MsgBox("Scansione terminata! Elementi individuati:" & contatore & " in " & fine.Subtract(inizio).Minutes * 60 + fine.Subtract(inizio).Seconds)
+        MsgBox("Scansione terminata! Elementi individuati:" & contatore & " in " & fine.Subtract(inizio).Minutes * 60 + fine.Subtract(inizio).Seconds & " secondi, con " & contatoreScartati & " anomalie.")
     End Sub
 
 End Class

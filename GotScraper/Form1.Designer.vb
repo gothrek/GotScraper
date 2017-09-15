@@ -26,10 +26,10 @@ Partial Class Form1
         Dim Appearance1 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
         Dim Appearance2 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
         Dim Appearance3 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
-        Dim UltraStatusPanel1 As Infragistics.Win.UltraWinStatusBar.UltraStatusPanel = New Infragistics.Win.UltraWinStatusBar.UltraStatusPanel()
-        Dim UltraStatusPanel2 As Infragistics.Win.UltraWinStatusBar.UltraStatusPanel = New Infragistics.Win.UltraWinStatusBar.UltraStatusPanel()
-        Dim UltraStatusPanel4 As Infragistics.Win.UltraWinStatusBar.UltraStatusPanel = New Infragistics.Win.UltraWinStatusBar.UltraStatusPanel()
-        Dim UltraStatusPanel3 As Infragistics.Win.UltraWinStatusBar.UltraStatusPanel = New Infragistics.Win.UltraWinStatusBar.UltraStatusPanel()
+        Dim UltraStatusPanel5 As Infragistics.Win.UltraWinStatusBar.UltraStatusPanel = New Infragistics.Win.UltraWinStatusBar.UltraStatusPanel()
+        Dim UltraStatusPanel6 As Infragistics.Win.UltraWinStatusBar.UltraStatusPanel = New Infragistics.Win.UltraWinStatusBar.UltraStatusPanel()
+        Dim UltraStatusPanel7 As Infragistics.Win.UltraWinStatusBar.UltraStatusPanel = New Infragistics.Win.UltraWinStatusBar.UltraStatusPanel()
+        Dim UltraStatusPanel8 As Infragistics.Win.UltraWinStatusBar.UltraStatusPanel = New Infragistics.Win.UltraWinStatusBar.UltraStatusPanel()
         Me.UltraButtonDirectory = New Infragistics.Win.Misc.UltraButton()
         Me.UltraRadioButtonItaliano = New Infragistics.Win.UltraWinEditors.UltraRadioButton()
         Me.UltraRadioButtonGroupManager1 = New Infragistics.Win.UltraWinEditors.UltraRadioButtonGroupManager(Me.components)
@@ -111,7 +111,7 @@ Partial Class Form1
         'UltraButtonScan
         '
         Me.UltraButtonScan.Enabled = False
-        Me.UltraButtonScan.Location = New System.Drawing.Point(237, 132)
+        Me.UltraButtonScan.Location = New System.Drawing.Point(224, 137)
         Me.UltraButtonScan.Name = "UltraButtonScan"
         Me.UltraButtonScan.Size = New System.Drawing.Size(75, 23)
         Me.UltraButtonScan.TabIndex = 11
@@ -124,22 +124,22 @@ Partial Class Form1
         Me.UltraStatusBar1.Controls.Add(Me.UltraRadioButtonEnglish)
         Me.UltraStatusBar1.Location = New System.Drawing.Point(0, 394)
         Me.UltraStatusBar1.Name = "UltraStatusBar1"
-        UltraStatusPanel1.Control = Me.UltraButtonDirectory
-        UltraStatusPanel1.SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode.Adjustable
-        UltraStatusPanel1.Style = Infragistics.Win.UltraWinStatusBar.PanelStyle.ControlContainer
-        UltraStatusPanel1.Width = 32
-        UltraStatusPanel2.AccessibleName = ""
-        UltraStatusPanel2.Key = "Directory"
-        UltraStatusPanel2.SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode.Spring
-        UltraStatusPanel4.Control = Me.UltraRadioButtonItaliano
-        UltraStatusPanel4.SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode.Adjustable
-        UltraStatusPanel4.Style = Infragistics.Win.UltraWinStatusBar.PanelStyle.ControlContainer
-        UltraStatusPanel4.Width = 32
-        UltraStatusPanel3.Control = Me.UltraRadioButtonEnglish
-        UltraStatusPanel3.SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode.Adjustable
-        UltraStatusPanel3.Style = Infragistics.Win.UltraWinStatusBar.PanelStyle.ControlContainer
-        UltraStatusPanel3.Width = 32
-        Me.UltraStatusBar1.Panels.AddRange(New Infragistics.Win.UltraWinStatusBar.UltraStatusPanel() {UltraStatusPanel1, UltraStatusPanel2, UltraStatusPanel4, UltraStatusPanel3})
+        UltraStatusPanel5.Control = Me.UltraButtonDirectory
+        UltraStatusPanel5.SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode.Adjustable
+        UltraStatusPanel5.Style = Infragistics.Win.UltraWinStatusBar.PanelStyle.ControlContainer
+        UltraStatusPanel5.Width = 32
+        UltraStatusPanel6.AccessibleName = ""
+        UltraStatusPanel6.Key = "Directory"
+        UltraStatusPanel6.SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode.Spring
+        UltraStatusPanel7.Control = Me.UltraRadioButtonItaliano
+        UltraStatusPanel7.SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode.Adjustable
+        UltraStatusPanel7.Style = Infragistics.Win.UltraWinStatusBar.PanelStyle.ControlContainer
+        UltraStatusPanel7.Width = 32
+        UltraStatusPanel8.Control = Me.UltraRadioButtonEnglish
+        UltraStatusPanel8.SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode.Adjustable
+        UltraStatusPanel8.Style = Infragistics.Win.UltraWinStatusBar.PanelStyle.ControlContainer
+        UltraStatusPanel8.Width = 32
+        Me.UltraStatusBar1.Panels.AddRange(New Infragistics.Win.UltraWinStatusBar.UltraStatusPanel() {UltraStatusPanel5, UltraStatusPanel6, UltraStatusPanel7, UltraStatusPanel8})
         Me.UltraStatusBar1.Size = New System.Drawing.Size(503, 32)
         Me.UltraStatusBar1.TabIndex = 10
         Me.UltraStatusBar1.Text = "UltraStatusBar1"
@@ -168,9 +168,9 @@ Partial Class Form1
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents Timer1 As Timer
     Private WithEvents UltraRadioButtonGroupManager1 As Infragistics.Win.UltraWinEditors.UltraRadioButtonGroupManager
-    Friend WithEvents UltraRadioButtonEnglish As Infragistics.Win.UltraWinEditors.UltraRadioButton
-    Friend WithEvents UltraRadioButtonItaliano As Infragistics.Win.UltraWinEditors.UltraRadioButton
-    Friend WithEvents UltraButtonDirectory As Infragistics.Win.Misc.UltraButton
-    Friend WithEvents UltraStatusBar1 As Infragistics.Win.UltraWinStatusBar.UltraStatusBar
-    Friend WithEvents UltraButtonScan As Infragistics.Win.Misc.UltraButton
+    Private WithEvents UltraRadioButtonEnglish As Infragistics.Win.UltraWinEditors.UltraRadioButton
+    Private WithEvents UltraRadioButtonItaliano As Infragistics.Win.UltraWinEditors.UltraRadioButton
+    Private WithEvents UltraButtonDirectory As Infragistics.Win.Misc.UltraButton
+    Private WithEvents UltraStatusBar1 As Infragistics.Win.UltraWinStatusBar.UltraStatusBar
+    Private WithEvents UltraButtonScan As Infragistics.Win.Misc.UltraButton
 End Class
