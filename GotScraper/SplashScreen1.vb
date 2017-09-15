@@ -33,7 +33,7 @@
         UltraLabelCopyright.Text = My.Application.Info.Copyright
 
         Timer1.Start()
-
+        'Timer2.Start()
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
@@ -45,9 +45,15 @@
         End If
     End Sub
 
+    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+        'todo scrolling 
+        UltraFormattedLinkLabel1.Top -= 1
+    End Sub
+
     Private Sub UltraButtonInsertCoin_Click(sender As Object, e As EventArgs) Handles UltraButtonInsertCoin.Click
         Form1.Show()
         Me.Close()
 
     End Sub
+
 End Class

@@ -24,6 +24,7 @@ Partial Class SplashScreen1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim Appearance1 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SplashScreen1))
         Dim Appearance2 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
         Dim Appearance3 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
         Dim Appearance4 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
@@ -35,8 +36,12 @@ Partial Class SplashScreen1
         Me.UltraLabelCopyright = New Infragistics.Win.Misc.UltraLabel()
         Me.UltraButtonInsertCoin = New Infragistics.Win.Misc.UltraButton()
         Me.UltraLabelApplicationTitle = New Infragistics.Win.Misc.UltraLabel()
+        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
+        Me.UltraPanel2 = New Infragistics.Win.Misc.UltraPanel()
         Me.UltraPanel1.ClientArea.SuspendLayout()
         Me.UltraPanel1.SuspendLayout()
+        Me.UltraPanel2.ClientArea.SuspendLayout()
+        Me.UltraPanel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Timer1
@@ -50,7 +55,7 @@ Partial Class SplashScreen1
         '
         'UltraPanel1.ClientArea
         '
-        Me.UltraPanel1.ClientArea.Controls.Add(Me.UltraFormattedLinkLabel1)
+        Me.UltraPanel1.ClientArea.Controls.Add(Me.UltraPanel2)
         Me.UltraPanel1.ClientArea.Controls.Add(Me.UltraLabelVersion)
         Me.UltraPanel1.ClientArea.Controls.Add(Me.UltraLabelCopyright)
         Me.UltraPanel1.ClientArea.Controls.Add(Me.UltraButtonInsertCoin)
@@ -63,14 +68,12 @@ Partial Class SplashScreen1
         '
         'UltraFormattedLinkLabel1
         '
-        Me.UltraFormattedLinkLabel1.Location = New System.Drawing.Point(459, 68)
+        Me.UltraFormattedLinkLabel1.Location = New System.Drawing.Point(0, 0)
         Me.UltraFormattedLinkLabel1.Name = "UltraFormattedLinkLabel1"
-        Me.UltraFormattedLinkLabel1.ScrollBarDisplayStyle = Infragistics.Win.UltraWinScrollBar.ScrollBarDisplayStyle.Automatic
-        Me.UltraFormattedLinkLabel1.Size = New System.Drawing.Size(130, 76)
+        Me.UltraFormattedLinkLabel1.Size = New System.Drawing.Size(130, 202)
         Me.UltraFormattedLinkLabel1.TabIndex = 8
         Me.UltraFormattedLinkLabel1.TabStop = True
-        Me.UltraFormattedLinkLabel1.Value = "<p style=""text-align:Center;"">Ringraziamenti:<br/><br/>Scraping using Arcade Data" &
-    "base <br/>by motoschifo&edsp;<br/><br/></p>"
+        Me.UltraFormattedLinkLabel1.Value = resources.GetString("UltraFormattedLinkLabel1.Value")
         '
         'UltraLabelVersion
         '
@@ -124,6 +127,20 @@ Partial Class SplashScreen1
         Me.UltraLabelApplicationTitle.TabIndex = 3
         Me.UltraLabelApplicationTitle.Text = " GotScraper"
         '
+        'Timer2
+        '
+        '
+        'UltraPanel2
+        '
+        '
+        'UltraPanel2.ClientArea
+        '
+        Me.UltraPanel2.ClientArea.Controls.Add(Me.UltraFormattedLinkLabel1)
+        Me.UltraPanel2.Location = New System.Drawing.Point(418, 70)
+        Me.UltraPanel2.Name = "UltraPanel2"
+        Me.UltraPanel2.Size = New System.Drawing.Size(130, 100)
+        Me.UltraPanel2.TabIndex = 9
+        '
         'SplashScreen1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -141,6 +158,8 @@ Partial Class SplashScreen1
         Me.UltraPanel1.ClientArea.ResumeLayout(False)
         Me.UltraPanel1.ClientArea.PerformLayout()
         Me.UltraPanel1.ResumeLayout(False)
+        Me.UltraPanel2.ClientArea.ResumeLayout(False)
+        Me.UltraPanel2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -152,4 +171,6 @@ Partial Class SplashScreen1
     Friend WithEvents UltraLabelApplicationTitle As Infragistics.Win.Misc.UltraLabel
     Friend WithEvents UltraLabelVersion As Infragistics.Win.Misc.UltraLabel
     Friend WithEvents UltraFormattedLinkLabel1 As Infragistics.Win.FormattedLinkLabel.UltraFormattedLinkLabel
+    Friend WithEvents Timer2 As Timer
+    Friend WithEvents UltraPanel2 As Infragistics.Win.Misc.UltraPanel
 End Class
